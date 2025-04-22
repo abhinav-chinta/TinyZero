@@ -34,13 +34,18 @@ dependencies = [
     "codetiming",
     "datasets",
     "dill",
+    "flash-attn>=2.7.0.post2",
     "hydra-core",
+    "ipython>=8.12.3",
+    "matplotlib>=3.7.5",
     "numpy",
     "pybind11",
     "ray",
+    "setuptools>=75.3.2",
     "tensordict",
     "transformers<4.48",
     "vllm<=0.6.3",
+    "wandb>=0.19.9",
 ]
 
 # Optional dependencies (extras_require in setup.py)
