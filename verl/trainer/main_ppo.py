@@ -30,6 +30,8 @@ def _select_rm_score_fn(data_source):
         return multiply.compute_score
     elif "countdown" in data_source:
         return countdown.compute_score
+    elif "sumukshashidhar-testing/reasoning-rerankers-relevance-sft-data" in data_source:
+        return relevance.compute_score
     else:
         raise NotImplementedError
 
