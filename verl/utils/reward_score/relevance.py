@@ -62,7 +62,7 @@ def extract_solution(solution_str: str, method: str = "strict") -> Optional[str]
 
 
 def compute_score(solution_str: str,
-                  ground_truth: dict,
+                  ground_truth,
                   method: str = "strict",
                   format_score: float = 0.0,
                   score: float = 1.0) -> float:
@@ -71,8 +71,9 @@ def compute_score(solution_str: str,
     ----------
     solution_str : str
         Raw model output.
-    ground_truth : dict
-        Must contain key `"ground_truth"` with int 0 or 1.
+    ground_truth : dict or int
+        Either a dict containing key `"ground_truth"` with int 0 or 1,
+        or directly an int (0 or 1).
     method       : {"strict","flexible"}
     format_score : float
         Reward when tag is well-formed but prediction is wrong.
@@ -84,7 +85,12 @@ def compute_score(solution_str: str,
     float
         Reward in [0, score].
     """
-    target = int(ground_truth["ground_truth"])
+    # Handle both dictionary and direct integer inputs
+    if isinstance(ground_truth, dict):
+        target = int(ground_truth["ground_truth"])
+    else:
+        target = int(ground_truth)
+        
     pred = extract_solution(solution_str, method=method)
 
     if pred is None:           # no parsable answer
